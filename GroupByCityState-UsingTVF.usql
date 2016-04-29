@@ -1,0 +1,11 @@
+﻿@res =
+    SELECT
+        cencty,censtate,
+        COUNT(cencty) AS TotalCityCount
+    FROM cityData() AS S
+GROUP BY cencty,censtate HAVING COUNT(cencty) >= 1800;
+
+OUTPUT @res
+    TO "/output/cityStateData-Grouped.csv"
+    ORDER BY TotalCityCount DESC
+    USING Outputters.Csv();

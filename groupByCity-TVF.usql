@@ -1,0 +1,12 @@
+﻿DROP FUNCTION IF EXISTS cityData;
+
+CREATE FUNCTION cityData()
+RETURNS @cityData TABLE(fipstate string, fipscty string, naics string, empflag string, emp_nf string, emp string, qp1_nf string, qp1 string, ap_nf string, ap string, est string, n1_4 string, n5_9 string, n10_19 string, n20_49 string, n50_99 string, n100_249 string, n250_499 string, n500_999 string, n1000 string, n1000_1 string, n1000_2 string, n1000_3 string, n1000_4 string, censtate string, cencty string)
+AS
+BEGIN
+    @cityData =
+        EXTRACT fipstate string, fipscty string, naics string, empflag string, emp_nf string, emp string, qp1_nf string, qp1 string, ap_nf string, ap string, est string, n1_4 string, n5_9 string, n10_19 string, n20_49 string, n50_99 string, n100_249 string, n250_499 string, n500_999 string, n1000 string, n1000_1 string, n1000_2 string, n1000_3 string, n1000_4 string, censtate string, cencty string
+        FROM "/Samples/Data/cbp14co.txt"
+        USING Extractors.Csv();
+RETURN;
+END;

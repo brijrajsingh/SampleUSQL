@@ -1,0 +1,11 @@
+﻿@res =
+    SELECT
+        cencty,
+        COUNT(cencty) AS TotalCount
+    FROM cityData() AS S
+GROUP BY cencty;
+
+OUTPUT @res
+    TO "/output/cityData-Grouped.csv"
+    ORDER BY TotalCount DESC
+    USING Outputters.Csv();
